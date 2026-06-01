@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>工业自动化与通用机械制造行业嵌入式软件工程师默认技能审核</title>
+  <style>
+    :root {
+      --bg: #08111f;
+      --card: rgba(15, 23, 42, 0.86);
+      --card2: rgba(30, 41, 59, 0.9);
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --line: rgba(148, 163, 184, 0.2);
+      --blue: #38bdf8;
+      --green: #22c55e;
+      --amber: #f59e0b;
+      --red: #f87171;
+      --purple: #a78bfa;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 8% 0%, rgba(56,189,248,.22), transparent 32%),
+        radial-gradient(circle at 92% 5%, rgba(167,139,250,.18), transparent 30%),
+        linear-gradient(180deg, #020617 0%, #0f172a 52%, #111827 100%);
+      min-height: 100vh;
+    }
+    .page { max-width: 1160px; margin: 0 auto; padding: 42px 22px 56px; }
+    .hero {
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      padding: 36px;
+      background: linear-gradient(135deg, rgba(15,23,42,.96), rgba(15,23,42,.72));
+      box-shadow: 0 28px 90px rgba(0,0,0,.38);
+    }
+    .label {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      color: #c7f1ff;
+      border: 1px solid rgba(56,189,248,.32);
+      background: rgba(56,189,248,.1);
+      font-size: 13px;
+      letter-spacing: .04em;
+    }
+    h1 { margin: 18px 0 12px; font-size: clamp(30px, 4.5vw, 48px); line-height: 1.12; }
+    .lead { margin: 0; max-width: 920px; color: var(--muted); line-height: 1.85; font-size: 16px; }
+    .grid { display: grid; gap: 16px; }
+    .meta { grid-template-columns: repeat(4, 1fr); margin-top: 28px; }
+    .box, .section, .skill {
+      border: 1px solid var(--line);
+      background: var(--card);
+      border-radius: 22px;
+      box-shadow: 0 22px 70px rgba(0,0,0,.24);
+    }
+    .box { padding: 18px; }
+    .box small { display: block; color: var(--muted); margin-bottom: 8px; }
+    .box strong { font-size: 16px; line-height: 1.5; }
+    .section { margin-top: 22px; overflow: hidden; }
+    .section-head { padding: 22px 24px; border-bottom: 1px solid var(--line); background: rgba(255,255,255,.03); }
+    .section-head h2 { margin: 0; font-size: 22px; }
+    .section-head p { margin: 10px 0 0; color: var(--muted); line-height: 1.75; }
+    .content { padding: 22px; }
+    .two { grid-template-columns: 1fr 1fr; }
+    .skill { background: var(--card2); padding: 18px; display: grid; grid-template-columns: 1.05fr 1.2fr auto; gap: 16px; align-items: start; }
+    .skill h3 { margin: 0 0 8px; font-size: 17px; }
+    .skill p { margin: 0; color: var(--muted); line-height: 1.75; font-size: 14px; }
+    .tag { white-space: nowrap; padding: 8px 12px; border-radius: 999px; font-size: 13px; font-weight: 700; }
+    .keep { color: #bbf7d0; background: rgba(34,197,94,.13); border: 1px solid rgba(34,197,94,.28); }
+    .maybe { color: #fde68a; background: rgba(245,158,11,.13); border: 1px solid rgba(245,158,11,.28); }
+    .replace { color: #fecaca; background: rgba(248,113,113,.13); border: 1px solid rgba(248,113,113,.28); }
+    .blue { color: #bae6fd; background: rgba(56,189,248,.13); border: 1px solid rgba(56,189,248,.26); }
+    ul { margin: 0; padding-left: 20px; color: var(--text); line-height: 1.9; }
+    .callout {
+      border: 1px solid rgba(56,189,248,.26);
+      background: linear-gradient(135deg, rgba(56,189,248,.11), rgba(167,139,250,.09));
+      border-radius: 20px;
+      padding: 20px;
+      line-height: 1.8;
+    }
+    .quote {
+      margin-top: 18px;
+      padding: 18px 20px;
+      border-radius: 18px;
+      border: 1px solid rgba(167,139,250,.24);
+      background: rgba(167,139,250,.08);
+      color: #ddd6fe;
+      line-height: 1.85;
+    }
+    .footer { margin-top: 20px; color: var(--muted); font-size: 13px; line-height: 1.8; }
+    @media (max-width: 900px) {
+      .meta, .two, .skill { grid-template-columns: 1fr; }
+      .hero { padding: 26px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <span class="label">Best Minds 业务面试官视角｜技能默认项审核</span>
+      <h1>工业自动化与通用机械制造行业<br />嵌入式软件工程师校招 / 社招默认考察技能审核</h1>
+      <p class="lead">审核原则：校招考专业相关的基础知识，主要偏相关专业学校里学的内容，且是这个岗位最需要的基础能力；社招选择对岗位非常重要、必备，且需要一定实践经验才能真正掌握的技能。</p>
+      <div class="grid meta">
+        <div class="box"><small>校招结论</small><strong>整体合适，建议保留</strong></div>
+        <div class="box"><small>社招结论</small><strong>大体合适，第四项需看方向</strong></div>
+        <div class="box"><small>主要风险</small><strong>避免把运动控制专项能力设为通用必考</strong></div>
+        <div class="box"><small>总建议</small><strong>通用嵌入式与运动控制方向分开配置</strong></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>一、核心结论</h2>
+        <p>这组默认技能配置整体方向正确。校招项能覆盖嵌入式软件工程师的关键基础；社招项能体现真实设备开发、实时系统和故障定位经验。唯一需要谨慎的是“伺服三环控制”，它更适合运动控制/伺服/电机驱动方向，不适合作为所有通用嵌入式岗位的默认项。</p>
+      </div>
+      <div class="content grid two">
+        <div class="callout"><strong>校招：</strong>建议保留 `C语言指针与内存`、`C语言数据结构`、`中断安全编程`、`STM32外设驱动开发`。这四项符合“学校里学过、专业相关、岗位最需要”的原则。</div>
+        <div class="callout"><strong>社招：</strong>建议保留 `RTOS任务调度`、`RTOS实时性分析`、`故障复现分析`。`伺服三环控制` 需要按岗位方向判断：运动控制方向保留，通用嵌入式方向建议替换。</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>二、校招默认技能审核</h2>
+        <p>校招应主要考察专业基础、课程知识，以及入门嵌入式开发最需要的底层能力。</p>
+      </div>
+      <div class="content grid">
+        <div class="skill">
+          <div><h3>嵌入式C/C++基础｜C语言指针与内存</h3><p>指针寻址机制、二级指针、结构体内存布局、栈区堆区差异、内存越界定位。</p></div>
+          <p>合适，建议保留。这是校招最基础、最该考的能力之一，直接关系到裸机、MCU、驱动开发中的地址操作、缓冲区管理和内存问题定位。</p>
+          <span class="tag keep">保留</span>
+        </div>
+        <div class="skill">
+          <div><h3>嵌入式C/C++基础｜C语言数据结构</h3><p>链表节点操作、环形缓冲区设计、队列缓存机制、查表法应用。</p></div>
+          <p>合适，建议保留。但考察方式应偏嵌入式场景，不建议变成纯算法题。重点应放在缓冲管理、事件流处理、资源受限环境下的数据组织。</p>
+          <span class="tag keep">保留</span>
+        </div>
+        <div class="skill">
+          <div><h3>嵌入式C/C++基础｜中断安全编程</h3><p>volatile 使用场景、临界区保护、共享变量可见性、原子操作选择。</p></div>
+          <p>非常合适，建议保留。这是工业设备嵌入式开发的高频基础能力，也很适合校招区分候选人是否真正理解中断、共享变量和并发访问风险。</p>
+          <span class="tag keep">保留</span>
+        </div>
+        <div class="skill">
+          <div><h3>STM32嵌入式开发｜STM32外设驱动开发</h3><p>GPIO复用配置、定时器计数模式、ADC采样配置、PWM输出控制、DMA通道映射。</p></div>
+          <p>合适，建议保留。STM32 是工业自动化和通用设备中常见的 MCU 平台，外设驱动能力能直接反映候选人的嵌入式入门实践水平。</p>
+          <span class="tag keep">保留</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>三、社招默认技能审核</h2>
+        <p>社招应考察真实项目经验、工程判断、设备级问题处理能力，以及需要实践才能掌握的关键技能。</p>
+      </div>
+      <div class="content grid">
+        <div class="skill">
+          <div><h3>RTOS实时系统开发｜RTOS任务调度</h3><p>优先级划分原则、抢占调度机制、周期任务设计、任务阻塞唤醒、任务饥饿风险。</p></div>
+          <p>非常合适，建议保留。工业设备通常存在控制、通信、采集、故障处理等多任务并发场景，任务调度理解是社招嵌入式工程师的关键能力。</p>
+          <span class="tag keep">保留</span>
+        </div>
+        <div class="skill">
+          <div><h3>RTOS实时系统开发｜RTOS实时性分析</h3><p>任务运行时间测量、中断延迟分析、调度抖动分析、CPU负载评估。</p></div>
+          <p>非常合适，建议保留。这项能有效区分候选人是否做过真实项目，因为只有做过设备级交付的人，才会真正关注中断延迟、调度抖动和负载余量。</p>
+          <span class="tag keep">保留</span>
+        </div>
+        <div class="skill">
+          <div><h3>嵌入式调试与可靠性保障｜故障复现分析</h3><p>复现路径还原、触发条件分析、现场数据分析、根因定位方法。</p></div>
+          <p>非常合适，强烈建议保留。工业设备强调稳定性和问题闭环，社招候选人的核心价值之一就是能否复现偶发问题、定位根因并推动解决。</p>
+          <span class="tag keep">保留</span>
+        </div>
+        <div class="skill">
+          <div><h3>运动控制与电机驱动开发｜伺服三环控制</h3><p>电流环设计、速度环设计、位置环设计、前馈补偿设计、跟随误差分析。</p></div>
+          <p>有条件合适。若岗位明确偏伺服驱动、运动控制、电机控制或设备控制算法，则可以保留；若是通用嵌入式软件工程师，则不建议作为默认项。</p>
+          <span class="tag maybe">有条件保留</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>四、建议配置</h2>
+        <p>基于“通用嵌入式软件工程师”和“运动控制方向嵌入式软件工程师”两种常见岗位画像，建议采用分层默认配置。</p>
+      </div>
+      <div class="content grid two">
+        <div class="callout">
+          <strong>通用嵌入式软件工程师：</strong>
+          <ul>
+            <li>RTOS实时系统开发｜RTOS任务调度</li>
+            <li>RTOS实时系统开发｜RTOS实时性分析</li>
+            <li>嵌入式调试与可靠性保障｜故障复现分析</li>
+            <li>嵌入式调试与可靠性保障｜性能与资源优化 或 接口联调</li>
+          </ul>
+        </div>
+        <div class="callout">
+          <strong>运动控制 / 伺服方向：</strong>
+          <ul>
+            <li>RTOS实时系统开发｜RTOS任务调度</li>
+            <li>RTOS实时系统开发｜RTOS实时性分析</li>
+            <li>嵌入式调试与可靠性保障｜故障复现分析</li>
+            <li>运动控制与电机驱动开发｜伺服三环控制</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>五、最终判断</h2>
+      </div>
+      <div class="content">
+        <ul>
+          <li><strong>校招：</strong>当前 4 项默认技能整体合理，建议保留。</li>
+          <li><strong>校招重点：</strong>考察基础知识和学校里学过、但能体现嵌入式思维的内容。</li>
+          <li><strong>社招：</strong>RTOS、实时性、故障复现、可靠性都适合作为默认项。</li>
+          <li><strong>主要调整：</strong>如果是通用嵌入式岗位，建议把“伺服三环控制”替换为“性能与资源优化”或“接口联调”。</li>
+          <li><strong>方向适配：</strong>如果岗位偏运动控制/伺服/电机驱动，则“伺服三环控制”可以保留。</li>
+        </ul>
+        <div class="quote">如果我是这个行业的业务面试官，我会这样定：校招看底层基础是否扎实；社招看是否真的做过设备级项目。伺服三环控制只给特定方向，不给所有通用嵌入式岗位默认铺开。</div>
+      </div>
+    </section>
+
+    <p class="footer">数据来源：工业自动化与通用机械制造行业-嵌入式软件工程师岗位知识点总清单。审核口径：校招偏专业基础，社招偏关键实践能力。</p>
+  </main>
+</body>
+</html>

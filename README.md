@@ -6,6 +6,7 @@
 
 - 总入口：https://0565cx.github.io/knowledge-audit-dashboard/
 - 电子工程师知识点审核看板：https://0565cx.github.io/knowledge-audit-dashboard/full-dashboards/electronic-engineer/
+- 嵌入式软件工程师默认技能审核：https://0565cx.github.io/knowledge-audit-dashboard/default-dashboards/工业自动化与通用机械制造行业-嵌入式软件工程师/
 
 ## 目录结构
 
@@ -14,6 +15,9 @@ knowledge-audit-dashboard/
   index.html
   full-dashboards/
     electronic-engineer/
+      index.html
+  default-dashboards/
+    工业自动化与通用机械制造行业-嵌入式软件工程师/
       index.html
 ```
 
