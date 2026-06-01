@@ -1,11 +1,30 @@
-# 电子工程师知识点审核看板
+# 知识点审核看板合集
 
-这是一个用于长期公开分享的静态 HTML 看板，可通过 GitHub Pages 部署。
+这是一个用于长期公开分享知识点审核看板的 GitHub Pages 静态站点。
 
-## 本地预览
+## 访问地址
 
-直接打开 `index.html` 即可查看。
+- 总入口：https://0565cx.github.io/knowledge-audit-dashboard/
+- 电子工程师知识点审核看板：https://0565cx.github.io/knowledge-audit-dashboard/full-dashboards/electronic-engineer/
 
-## GitHub Pages 部署
+## 目录结构
 
-将本目录内容上传到 GitHub 仓库后，在仓库 Settings > Pages 中选择从 `main` 分支根目录部署。
+```text
+knowledge-audit-dashboard/
+  index.html
+  full-dashboards/
+    electronic-engineer/
+      index.html
+```
+
+## 后续新增看板
+
+建议每个完整审核看板使用独立目录，例如：
+
+```text
+full-dashboards/mechanical-engineer/
+full-dashboards/electrical-engineer/
+full-dashboards/automation-engineer/
+```
+
+新增后，在根目录 `index.html` 中添加对应入口卡片。

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>电子工程师知识点审核看板</title>
+  <style>
+    :root {
+      --bg: #0e1117;
+      --panel: #151a22;
+      --panel-2: #10151d;
+      --text: #e7edf6;
+      --muted: #93a4bc;
+      --line: rgba(148, 163, 184, 0.18);
+      --accent: #7dd3fc;
+      --accent-2: #a78bfa;
+      --good: #34d399;
+      --warn: #fbbf24;
+      --bad: #fb7185;
+      --chip: rgba(125, 211, 252, 0.12);
+      --shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: radial-gradient(circle at top left, rgba(167,139,250,0.10), transparent 30%), radial-gradient(circle at top right, rgba(125,211,252,0.10), transparent 30%), var(--bg); color: var(--text); font-family: "PingFang SC", "Hiragino Sans GB", "Source Han Sans SC", "Noto Sans CJK SC", system-ui, sans-serif; }
+    body { line-height: 1.6; }
+    .wrap { max-width: 1440px; margin: 0 auto; padding: 28px 24px 56px; }
+    .hero {
+      background: linear-gradient(180deg, rgba(21,26,34,0.98), rgba(16,21,29,0.98));
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(125,211,252,0.08), transparent 36%, rgba(167,139,250,0.06));
+      pointer-events: none;
+    }
+    .eyebrow { color: var(--accent); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 10px; }
+    h1 { margin: 0; font-size: 34px; line-height: 1.15; letter-spacing: -0.02em; }
+    .lead { margin: 14px 0 0; max-width: 1040px; color: #d3dceb; font-size: 15px; }
+    .meta-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 22px; position: relative; z-index: 1; }
+    .meta {
+      background: rgba(8, 12, 18, 0.5);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px 18px;
+    }
+    .meta .label { color: var(--muted); font-size: 12px; margin-bottom: 6px; }
+    .meta .value { font-size: 15px; font-weight: 600; }
+    .grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 18px; margin-top: 18px; }
+    .section {
+      background: rgba(21,26,34,0.92);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+    .section h2 {
+      margin: 0 0 14px;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section h2::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(125,211,252,0.15);
+      flex: 0 0 auto;
+    }
+    .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .card {
+      background: rgba(10, 14, 20, 0.65);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px;
+      min-height: 122px;
+    }
+    .card h3 { margin: 0 0 10px; font-size: 15px; color: #f2f6fb; }
+    .card p { margin: 0; color: var(--muted); font-size: 13px; }
+    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--chip);
+      border: 1px solid rgba(125,211,252,0.16);
+      color: #d8f2ff;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .kpi-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .kpi {
+      background: linear-gradient(180deg, rgba(17,22,30,0.95), rgba(10,13,19,0.95));
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+    }
+    .kpi .big { font-size: 28px; font-weight: 700; letter-spacing: -0.03em; }
+    .kpi .desc { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .list {
+      display: grid;
+      gap: 12px;
+    }
+    .list-item {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 14px;
+      padding: 14px 0;
+      border-top: 1px solid var(--line);
+    }
+    .list-item:first-child { border-top: 0; padding-top: 0; }
+    .list-item .term { font-weight: 700; color: #f4f8fd; }
+    .list-item .desc { color: var(--muted); }
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(10,14,20,0.7);
+    }
+    .table th, .table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      font-size: 13px;
+    }
+    .table th { color: #dfe9f5; background: rgba(148,163,184,0.06); }
+    .table td { color: var(--muted); }
+    .table tr:last-child td { border-bottom: 0; }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .tag.good { background: rgba(52,211,153,0.14); color: #8ef0c7; }
+    .tag.warn { background: rgba(251,191,36,0.14); color: #fcd36f; }
+    .tag.bad { background: rgba(251,113,133,0.14); color: #ff9eb0; }
+    .stack { display: grid; gap: 14px; }
+    .quote {
+      background: rgba(8, 12, 18, 0.65);
+      border-left: 3px solid var(--accent-2);
+      border-radius: 14px;
+      padding: 14px 16px;
+      color: #d9e4f3;
+    }
+    .mini-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .mini-head h3 { margin: 0; font-size: 16px; }
+    .mini-head span { color: var(--muted); font-size: 12px; }
+    .footer-note {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 12px;
+      text-align: right;
+    }
+    @media (max-width: 1100px) {
+      .meta-row, .grid, .cards, .kpi-grid { grid-template-columns: 1fr; }
+      .list-item { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="eyebrow">Consumer Electronics · Communications Equipment · Review Board</div>
+      <h1>电子工程师知识点审核看板</h1>
+      <p class="lead">基于消费电子与通信设备制造行业电子工程师知识点清单，从“最懂这个岗位的人”的角度审核覆盖度、边界、深浅和可出题性。重点看是否能支持校招与社招的通用面试题题库，而不是单一公司的岗位口径。</p>
+      <div class="meta-row">
+        <div class="meta"><div class="label">岗位</div><div class="value">电子工程师</div></div>
+        <div class="meta"><div class="label">行业</div><div class="value">消费电子与通信设备制造行业</div></div>
+        <div class="meta"><div class="label">招聘场景</div><div class="value">校招 + 社招</div></div>
+        <div class="meta"><div class="label">经验区间</div><div class="value">0～5 年</div></div>
+      </div>
+    </section>
+
+    <div class="grid">
+      <section class="section">
+        <h2>专家组视角</h2>
+        <div class="cards">
+          <div class="card">
+            <h3>消费电子硬件架构负责人</h3>
+            <p>长期负责手机、耳机、智能硬件、可穿戴产品的硬件方案、量产导入与平台化设计，关注硬件基础、方案设计、功耗、热设计与整机可交付性。</p>
+            <div class="pill-row">
+              <span class="pill">硬件方案</span>
+              <span class="pill">量产导入</span>
+              <span class="pill">功耗热设计</span>
+            </div>
+          </div>
+          <div class="card">
+            <h3>通信设备 / 无线终端射频负责人</h3>
+            <p>熟悉射频链路、天线匹配、无线链路、认证整改与整机性能，重点判断 RF、无线共存、接口和高速信号相关能力是否足够。</p>
+            <div class="pill-row">
+              <span class="pill">射频链路</span>
+              <span class="pill">天线调试</span>
+              <span class="pill">无线共存</span>
+            </div>
+          </div>
+          <div class="card">
+            <h3>制造导入 / NPI 硬件负责人</h3>
+            <p>关注试产、量产、良率、失效分析和可制造性，判断知识点是否能支撑面试中的问题闭环、变更管理与生产验证。</p>
+            <div class="pill-row">
+              <span class="pill">试产验证</span>
+              <span class="pill">失效分析</span>
+              <span class="pill">良率分析</span>
+            </div>
+          </div>
+          <div class="card">
+            <h3>硬件面试官 / 技术评审负责人</h3>
+            <p>判断哪些知识点适合出题，哪些太基础、太窄或太依赖公司场景；优先保留能区分候选人深度、经验与工程判断力的内容。</p>
+            <div class="pill-row">
+              <span class="pill">可出题性</span>
+              <span class="pill">边界判断</span>
+              <span class="pill">难度分层</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>综合结论</h2>
+        <div class="stack">
+          <div class="quote">这份清单方向是对的，已经比普通“电子工程师”清单更接近消费电子与通信设备制造行业。</div>
+          <div class="quote">但它还不够“全行业通用”：硬件核心基础覆盖尚可，RF / 无线 / EMC / NPI 已有框架，仍缺少若干行业高频能力。</div>
+          <div class="quote">同时存在两个问题：一是部分知识点偏工具操作或流程名词，面试价值不高；二是少数点对 0～5 年候选人偏难或过窄。</div>
+        </div>
+      </section>
+    </div>
+
+    <section class="section" style="margin-top:18px;">
+      <h2>一、总体评价</h2>
+      <div class="kpi-grid">
+        <div class="kpi"><div class="big" style="color:var(--good);">已覆盖</div><div class="desc">电路基础、硬件方案、PCB、调试验证、RF/天线、无线通信、EMC/安规、器件选型、NPI/量产</div></div>
+        <div class="kpi"><div class="big" style="color:var(--warn);">可用</div><div class="desc">用于生成一批基础面试题，当前清单已经可以支持校招与社招的初版出题</div></div>
+        <div class="kpi"><div class="big" style="color:var(--bad);">需增强</div><div class="desc">若作为全行业通用题库，还需要补齐可靠性、功耗热设计、高速接口、测试设计等关键层</div></div>
+      </div>
+    </section>
+
+    <div class="grid">
+      <section class="section">
+        <h2>二、当前清单的优点</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th style="width:24%">能力域</th>
+              <th style="width:18%">当前是否覆盖</th>
+              <th>评价</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>电路基础</td><td><span class="tag good">已覆盖</span></td><td>模拟、数字、电源、微控制器外围都有，适合作为基础能力池。</td></tr>
+            <tr><td>硬件方案</td><td><span class="tag good">已覆盖</span></td><td>需求分解、架构、器件、风险评估合理。</td></tr>
+            <tr><td>电路板与信号</td><td><span class="tag good">已覆盖</span></td><td>布局布线、信号完整性、电源完整性、可制造性覆盖较好。</td></tr>
+            <tr><td>调试验证</td><td><span class="tag good">已覆盖</span></td><td>上电、波形、接口、故障定位都适合面试。</td></tr>
+            <tr><td>射频与天线</td><td><span class="tag good">已覆盖</span></td><td>有射频链路、匹配、天线、测试。</td></tr>
+            <tr><td>无线通信硬件</td><td><span class="tag good">已覆盖</span></td><td>蓝牙、无线局域网、模组、共存方向合理。</td></tr>
+            <tr><td>电磁兼容与安全认证</td><td><span class="tag good">已覆盖</span></td><td>电磁干扰防护、静电防护、安规、认证整改均有。</td></tr>
+            <tr><td>器件 / 物料</td><td><span class="tag good">已覆盖</span></td><td>规格书、替代料、物料清单、降额都对。</td></tr>
+            <tr><td>可靠性 / 量产</td><td><span class="tag good">已覆盖</span></td><td>试产、生产测试、失效、变更都已覆盖。</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section">
+        <h2>三、最需要补充的内容</h2>
+        <div class="list">
+          <div class="list-item"><div class="term">可靠性设计与验证</div><div class="desc">补高低温、温循、跌落、振动、老化、失效率、寿命评估等高频能力。</div></div>
+          <div class="list-item"><div class="term">功耗与热设计</div><div class="desc">补功耗预算、休眠电流、电池续航、温升、充电管理、电池保护。</div></div>
+          <div class="list-item"><div class="term">音频硬件</div><div class="desc">对耳机、音箱、可穿戴尤其重要，覆盖麦克风、功放、降噪链路等。</div></div>
+          <div class="list-item"><div class="term">高速接口设计</div><div class="desc">补通用串行总线、移动设备显示接口、双倍速率存储器、以太网等接口场景。</div></div>
+          <div class="list-item"><div class="term">硬件测试设计</div><div class="desc">补测试方案、边界测试、指标边界、测试报告分析。</div></div>
+        </div>
+      </section>
+    </div>
+
+    <section class="section" style="margin-top:18px;">
+      <h2>四、建议降权或删除的过于基础知识点</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th style="width:28%">位置</th>
+            <th style="width:18%">知识点</th>
+            <th style="width:18%">建议</th>
+            <th>理由</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>硬件调试与测试｜波形测试分析</td><td>示波器探头选择</td><td><span class="tag warn">降权</span></td><td>偏基础仪器使用，单独出题价值低，可合并到“纹波测量方法”。</td></tr>
+          <tr><td>射频与天线｜射频测试</td><td>频谱仪基础操作</td><td><span class="tag warn">降权</span></td><td>工具操作型，建议改成“频谱测试结果解读”。</td></tr>
+          <tr><td>射频与天线｜射频测试</td><td>网络分析仪校准</td><td><span class="tag warn">降权</span></td><td>偏操作流程，除射频专岗外不宜作为通用核心题。</td></tr>
+          <tr><td>器件选型｜物料清单一致性控制</td><td>物料编码管理</td><td><span class="tag bad">删除或降权</span></td><td>偏公司流程，不适合全行业通用题库。</td></tr>
+          <tr><td>NPI量产导入｜硬件变更管理</td><td>硬件变更触发场景</td><td><span class="tag warn">保留并改写</span></td><td>建议改成“硬件变更影响评估”，避免考流程名词。</td></tr>
+          <tr><td>电路设计基础｜微控制器外围设计</td><td>通用输入输出接口接口设计</td><td><span class="tag warn">改写</span></td><td>表达重复，建议简化成“通用输入输出接口设计”。</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <div class="grid">
+      <section class="section">
+        <h2>五、建议调整的过难或过窄知识点</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>当前位置</th>
+              <th>问题</th>
+              <th>建议</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>阻抗匹配｜Smith 圆图应用</td><td>对非射频方向偏难。</td><td>保留在射频方向，标为社招 / 进阶，不作为通用必考。</td></tr>
+            <tr><td>射频链路设计｜功率预算评估</td><td>对普通消费电子硬件偏进阶。</td><td>保留，但适合 3 年以上或射频方向。</td></tr>
+            <tr><td>信号完整性控制｜高速信号端接</td><td>对低速消费电子偏难。</td><td>保留，适合通信设备与高速接口方向。</td></tr>
+            <tr><td>信号完整性控制｜差分线等长控制</td><td>方向性较强。</td><td>保留，建议补充通用串行总线、移动设备显示接口、以太网场景。</td></tr>
+            <tr><td>无线共存分析｜无线吞吐影响</td><td>更偏系统级。</td><td>保留为进阶点。</td></tr>
+            <tr><td>安规设计｜爬电距离与电气间隙</td><td>对低压消费电子不总是核心。</td><td>保留，但更适合电源适配器、充电器、通信电源类产品。</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section">
+        <h2>六、最终审核结论</h2>
+        <div class="stack">
+          <div class="quote">方向正确，基础可用，但作为全行业通用题库还需补强。</div>
+          <div class="quote">建议保留当前 9 个技能分类的大部分内容，同时新增或补强可靠性、功耗热设计、高速接口、硬件测试设计。</div>
+          <div class="quote">若要进一步优化，可在第 2 版基础上重建为更平衡的分类，并把工具型、流程型、过基础知识点降权或改写。</div>
+        </div>
+        <div class="pill-row" style="margin-top:16px;">
+          <span class="pill">校招基础题可用</span>
+          <span class="pill">社招还需补强</span>
+          <span class="pill">全行业通用性待提升</span>
+        </div>
+      </section>
+    </div>
+
+    <div class="footer-note">电子工程师知识点审核看板 · 适合打开后横向浏览</div>
+  </div>
+</body>
+</html>
